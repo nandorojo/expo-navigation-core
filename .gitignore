@@ -1,0 +1,6 @@
+node_modules
+node_modules/**/*
+build
+example/next-nav/node_modules
+.expo
+yarn-error.log

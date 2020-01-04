@@ -1,0 +1,43 @@
+{
+  "name": "expo-navigation-core",
+  "version": "0.0.1",
+  "description": "Main package for reusable expo navigation elements. This package probably shouldn't be installed on its own.",
+  "sideEffects": true,
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "repository": "https://github.com/nandorojo/expo-navigation-core",
+  "author": "Fernando Rojo",
+  "license": "MIT",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
+  },
+  "files": [
+    "build"
+  ],
+  "jest": {
+    "preset": "jest-expo-enzyme"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/react": "^16.9.16",
+    "eslint": "^6.8.0",
+    "expo-module-scripts": "^1.1.1",
+    "jest-expo-enzyme": "^0.0.1",
+    "prettier": "^1.19.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-web": "^0.11.7"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "react-navigation-hooks": "^1.1.0",
+    "universe": "^0.8.1"
+  }
+}
