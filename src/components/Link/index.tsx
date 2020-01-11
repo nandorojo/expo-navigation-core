@@ -4,40 +4,37 @@ import useRouting from '../../hooks/use-routing'
 import empty from '../../utils/empty'
 import { LinkProps } from '..'
 
+// I made this an "HOC" of sorts to let us both use TS generics and React.forwardRef
+
 /**
- * Link component for react-navigation and web.
+ * Example usage from expo-gatsby-navigation
  *
- * @param props
- *  - routeName: string
- *  - params?: object
- *  - web?: Dictionary for web, see docs for details
+ * ```es6
+ * import React, { ClassAttributes } from 'react'
+ * import { LinkMaker, LinkProps } from 'expo-navigation-core'
+ * import { Text } from 'react-native'
+ * import { ExtraLinkProps, GatsbyWebProps } from './types'
  *
- * ## Usage
- *
- * ```diff
- * -import { TouchableOpacity, Text } from 'react-native'
- * -...
- * -<TouchableOpacity onPress={() => navigate({ routeName: 'home', params: { user: 'fernando' } })}>
- * -  <Text>Press me!</Text>
- * - </TouchableOpacity>
- *
- * +import { Link } from 'expo-navigation-core'
- ...
- * +<Link routeName="home" params={{ user: 'fernando' }}>
- * +  Press me!
- * +</Link>
- *```
- *
+ * const Link = React.forwardRef(
+ * 	(
+ * 		props: LinkProps<ExtraLinkProps, GatsbyWebProps>,
+ * 		ref?: ClassAttributes<Text>['ref']
+ * 	) => {
+ *    // here we use the LinkMaker to pass on TS generics
+ * 		const Link = LinkMaker<ExtraLinkProps, GatsbyWebProps>()
+ * 		return <Link {...props} ref={ref} />
+ * 	}
+ * )
+ * export default React.memo(Link)
+ * ```
  */
 
-// WORK-AROUND:
-// I made this an "HOC" of sorts to let us both use TS generics and React.forwardRef
 const LinkMaker = <
   ExtraProps extends object = {},
   Web extends object = {},
   Params extends object = {}
 >() =>
-  React.forwardRef(
+  React.forwardRef<Text>(
     (
       props: LinkProps<ExtraProps, Web, Params>,
       ref?: ClassAttributes<Text>['ref']
