@@ -5,20 +5,20 @@ import empty from '../../utils/empty'
 import { LinkProps } from '..'
 
 /**
- * Link component for react-navigation and nextjs.
+ * Link component for react-navigation and web.
  *
  * @param props
  *  - routeName: string
  *  - params?: object
- *  - web?: Dictionary for web, depends on library
+ *  - web?: Dictionary for web, see docs for details
  *
  * ## Usage
  *
  * ```diff
- * -import { TouchableOpacity } from 'react-native'
+ * -import { TouchableOpacity, Text } from 'react-native'
  * -...
  * -<TouchableOpacity onPress={() => navigate({ routeName: 'home', params: { user: 'fernando' } })}>
- * -  Press me!
+ * -  <Text>Press me!</Text>
  * - </TouchableOpacity>
  *
  * +import { Link } from 'expo-navigation-core'
@@ -29,40 +29,44 @@ import { LinkProps } from '..'
  *```
  *
  */
-const Link = React.forwardRef(
-  <
-    ExtraProps extends object = {},
-    Params extends object = {},
-    Web extends object = {}
-  >(
-    props: LinkProps<ExtraProps, Params, Web>,
-    ref?: ClassAttributes<Text>['ref']
-  ) => {
-    const { navigate } = useRouting()
-    const {
-      touchableOpacityProps = empty.object,
-      routeName,
-      params,
-      children,
-    } = props
 
-    const nav = useCallback(
-      () =>
-        navigate({
-          routeName: routeName || '/',
-          params,
-        }),
-      [navigate, routeName, params]
-    )
+// WORK-AROUND:
+// I made this an "HOC" of sorts to let us both use TS generics and React.forwardRef
+const LinkMaker = <
+  ExtraProps extends object = {},
+  Web extends object = {},
+  Params extends object = {}
+>() =>
+  React.forwardRef(
+    (
+      props: LinkProps<ExtraProps, Web, Params>,
+      ref?: ClassAttributes<Text>['ref']
+    ) => {
+      const { navigate } = useRouting()
+      const {
+        touchableOpacityProps = empty.object,
+        routeName,
+        params,
+        children,
+      } = props
 
-    return (
-      <TouchableOpacity {...touchableOpacityProps} onPress={nav}>
-        <Text ref={ref} style={props.style} accessibiltyRole="link">
-          {children}
-        </Text>
-      </TouchableOpacity>
-    )
-  }
-)
+      const nav = useCallback(
+        () =>
+          navigate({
+            routeName: routeName || '/',
+            params,
+          }),
+        [navigate, routeName, params]
+      )
 
-export default Link
+      return (
+        <TouchableOpacity {...touchableOpacityProps} onPress={nav}>
+          <Text style={props.style} accessibiltyRole="link">
+            {children}
+          </Text>
+        </TouchableOpacity>
+      )
+    }
+  )
+
+export default LinkMaker

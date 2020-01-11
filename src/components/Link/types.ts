@@ -3,8 +3,8 @@ import { ComponentPropsWithoutRef, CSSProperties } from 'react'
 
 export type LinkProps<
   ExtraProps extends object = {},
-  Params extends object = {},
-  Web extends object = {}
+  Web extends object = {},
+  Params extends object = {}
 > = {
   /**
    * Required: child component/text
@@ -17,7 +17,7 @@ export type LinkProps<
   /**
    * Link text style
    */
-  style?: TextStyle | CSSProperties
+  style?: TextStyle
   /**
    * Route name to navigate to
    */

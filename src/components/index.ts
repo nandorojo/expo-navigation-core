@@ -1,2 +1,2 @@
-export { default as Link } from './Link'
+export { default as LinkMaker } from './Link'
 export { LinkProps } from './Link/types'
