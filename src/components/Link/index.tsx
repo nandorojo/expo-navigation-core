@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { TouchableOpacity, Text, TextStyle } from 'react-native'
+import React, { useCallback, ClassAttributes } from 'react'
+import { TouchableOpacity, Text } from 'react-native'
 import useRouting from '../../hooks/use-routing'
 import empty from '../../utils/empty'
 import { LinkProps } from '..'
@@ -17,37 +17,52 @@ import { LinkProps } from '..'
  * ```diff
  * -import { TouchableOpacity } from 'react-native'
  * -...
- * -<TouchableOpacity onPress={() => navigate({ routeName: 'home' })}>
+ * -<TouchableOpacity onPress={() => navigate({ routeName: 'home', params: { user: 'fernando' } })}>
  * -  Press me!
  * - </TouchableOpacity>
  *
  * +import { Link } from 'expo-navigation-core'
  ...
- * +<Link routeName="home">
+ * +<Link routeName="home" params={{ user: 'fernando' }}>
  * +  Press me!
  * +</Link>
  *```
  *
  */
-export default function Link<
-  ExtraProps extends object = {},
-  Web extends object = {}
->(props: LinkProps<ExtraProps, Web>) {
-  const { navigate } = useRouting()
-  const { touchableOpacityProps = empty.object, routeName, params } = props
+const Link = React.forwardRef(
+  <
+    ExtraProps extends object = {},
+    Params extends object = {},
+    Web extends object = {}
+  >(
+    props: LinkProps<ExtraProps, Params, Web>,
+    ref?: ClassAttributes<Text>['ref']
+  ) => {
+    const { navigate } = useRouting()
+    const {
+      touchableOpacityProps = empty.object,
+      routeName,
+      params,
+      children,
+    } = props
 
-  const nav = useCallback(
-    () =>
-      navigate({
-        routeName,
-        params,
-      }),
-    [navigate, routeName, params]
-  )
+    const nav = useCallback(
+      () =>
+        navigate({
+          routeName: routeName || '/',
+          params,
+        }),
+      [navigate, routeName, params]
+    )
 
-  return (
-    <TouchableOpacity {...touchableOpacityProps} onPress={nav}>
-      <Text style={props.style as TextStyle}>{props.children}</Text>
-    </TouchableOpacity>
-  )
-}
+    return (
+      <TouchableOpacity {...touchableOpacityProps} onPress={nav}>
+        <Text ref={ref} style={props.style} accessibiltyRole="link">
+          {children}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+)
+
+export default Link

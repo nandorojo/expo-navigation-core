@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, CSSProperties } from 'react'
 
 export type LinkProps<
   ExtraProps extends object = {},
+  Params extends object = {},
   Web extends object = {}
 > = {
   /**
@@ -24,9 +25,6 @@ export type LinkProps<
   /**
    * Navigation state parameters to pass to the screen you're navigating to.
    */
-  params?: object
+  params?: Params
   web?: Web
 } & ExtraProps
-// & Web extends object
-//   ? { web: Web }
-// : {} & ExtraProps

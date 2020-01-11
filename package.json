@@ -1,10 +1,11 @@
 {
   "name": "expo-navigation-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Main package for reusable expo navigation elements. This package probably shouldn't be installed on its own.",
   "sideEffects": true,
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "homepage": "https://github.com/nandorojo/expo-navigation-core",
   "repository": "https://github.com/nandorojo/expo-navigation-core",
   "author": "Fernando Rojo",
   "license": "MIT",
@@ -27,6 +28,7 @@
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.16",
     "eslint": "^6.8.0",
+    "eslint-config-universe": "^2.1.0",
     "expo-module-scripts": "^1.1.1",
     "jest-expo-enzyme": "^0.0.1",
     "prettier": "^1.19.1",
@@ -37,7 +39,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "react-navigation-hooks": "^1.1.0",
-    "universe": "^0.8.1"
+    "react-navigation-hooks": "^1.1.0"
   }
 }
