@@ -1,5 +1,5 @@
 import { TouchableOpacity, TextStyle } from 'react-native'
-import { ComponentPropsWithoutRef, CSSProperties } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 export type LinkProps<
   ExtraProps extends object = {},
