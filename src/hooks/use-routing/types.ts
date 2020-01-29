@@ -3,6 +3,7 @@ type GenericRoute = {
    * React navigation route & web page URL extension
    */
   routeName: string
+  key?: string
   /**
    * (optional) Dictionary that will be accessed via `getParams` in the target screen.
    */

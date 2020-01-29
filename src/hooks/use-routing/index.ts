@@ -1,33 +1,40 @@
-import { useNavigation } from 'react-navigation-hooks'
+import {
+  useNavigation,
+  useRoute,
+  RouteProp,
+  ParamListBase,
+  NavigationProp,
+} from '@react-navigation/native'
 import { useCallback } from 'react'
+import _ from 'lodash'
 import { NavigateTo } from '..'
 
-export default function useRouting() {
-  const {
-    navigate: nav,
-    getParam: grabParam,
-    push: pushTo,
-    goBack,
-  } = useNavigation()
+export default function useRouting<
+  T extends RouteProp<ParamListBase, string>,
+  N extends NavigationProp<ParamListBase>
+>() {
+  const { navigate: nav, push: pushTo, goBack } = useNavigation<N>()
+
+  const { params } = useRoute<T>()
 
   const navigate = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
       nav({
-        routeName: route.routeName,
+        name: route.routeName,
         params: route.params,
+        key: route.key,
       })
     },
     [nav]
   )
   const push = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
-      pushTo(route)
+      pushTo && pushTo(route)
     },
     [pushTo]
   )
   const getParam = <Param>(param: string, fallback?: unknown): Param => {
-    const value: Param = grabParam(param, fallback)
-    return value
+    return _.get(params, param, fallback)
   }
 
   return { navigate, getParam, push, goBack: () => goBack() }

@@ -16,7 +16,8 @@
     "test": "expo-module test",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module"
+    "expo-module": "expo-module",
+    "upload": "yarn publish --tag v5"
   },
   "files": [
     "build"
@@ -38,7 +39,7 @@
     "react-native-web": "^0.11.7"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "react-navigation-hooks": "^1.1.0"
+    "@react-navigation/native": "^5.0.0-alpha.29",
+    "lodash": "^4.17.15"
   }
 }
