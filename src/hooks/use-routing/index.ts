@@ -13,6 +13,7 @@ export default function useRouting<
   T extends RouteProp<ParamListBase, string>,
   N extends NavigationProp<ParamListBase>
 >() {
+  // @ts-ignore
   const { navigate: nav, push: pushTo, goBack } = useNavigation<N>()
 
   const { params } = useRoute<T>()
@@ -29,9 +30,10 @@ export default function useRouting<
   )
   const push = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
-      pushTo && pushTo(route)
+      if (pushTo) pushTo(route)
+      else navigate<To>(route)
     },
-    [pushTo]
+    [pushTo, navigate]
   )
   const getParam = <Param>(param: string, fallback?: unknown): Param => {
     return _.get(params, param, fallback)
