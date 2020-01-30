@@ -39,5 +39,5 @@ export default function useRouting<
     return _.get(params, param, fallback)
   }
 
-  return { navigate, getParam, push, goBack: () => goBack() }
+  return { navigate, getParam, push, goBack: () => goBack(), params }
 }
