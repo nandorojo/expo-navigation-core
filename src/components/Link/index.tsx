@@ -42,6 +42,7 @@ const LinkMaker = <
         routeName,
         params,
         children,
+        isText = true,
       } = props
 
       const nav = useCallback(
@@ -55,9 +56,13 @@ const LinkMaker = <
 
       return (
         <TouchableOpacity {...touchableOpacityProps} onPress={nav}>
-          <Text style={props.style} accessibiltyRole="link">
-            {children}
-          </Text>
+          {isText ? (
+            <Text style={props.style} accessibiltyRole="link">
+              {children}
+            </Text>
+          ) : (
+            children
+          )}
         </TouchableOpacity>
       )
     }

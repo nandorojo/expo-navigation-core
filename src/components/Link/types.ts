@@ -27,4 +27,11 @@ export type LinkProps<
    */
   params?: Params
   web?: Web
+  /**
+   * If false, it will not automatically wrap the children with a `Text` node.
+   * This is useful if you want to use a link around something other than text.
+   *
+   * Default: `true`
+   */
+  isText?: boolean
 } & ExtraProps
