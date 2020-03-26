@@ -1,6 +1,6 @@
 {
   "name": "expo-navigation-core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Main package for reusable expo navigation elements. This package probably shouldn't be installed on its own.",
   "sideEffects": true,
   "main": "build/index.js",
