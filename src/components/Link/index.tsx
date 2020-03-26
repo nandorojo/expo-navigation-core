@@ -57,7 +57,7 @@ const LinkMaker = <
       return (
         <TouchableOpacity {...touchableOpacityProps} onPress={nav}>
           {isText ? (
-            <Text style={props.style} accessibiltyRole="link">
+            <Text ref={ref} style={props.style} accessibiltyRole="link">
               {children}
             </Text>
           ) : (
