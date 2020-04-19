@@ -9,14 +9,16 @@ import { useCallback } from 'react'
 import _ from 'lodash'
 import { NavigateTo } from '..'
 
+const prefetch = (routeName: string) => {}
+
 export default function useRouting<
-  T extends RouteProp<ParamListBase, string>,
-  N extends NavigationProp<ParamListBase>
+  RProp extends RouteProp<ParamListBase, string>,
+  NProp extends NavigationProp<ParamListBase>
 >() {
   // @ts-ignore
-  const { navigate: nav, push: pushTo, goBack } = useNavigation<N>()
+  const { navigate: nav, push: pushTo, goBack } = useNavigation<NProp>()
 
-  const { params } = useRoute<T>()
+  const { params } = useRoute<RProp>()
 
   const navigate = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
@@ -39,5 +41,5 @@ export default function useRouting<
     return _.get(params, param, fallback)
   }
 
-  return { navigate, getParam, push, goBack: () => goBack(), params }
+  return { navigate, getParam, push, goBack: () => goBack(), params, prefetch }
 }
