@@ -12,11 +12,16 @@ import { NavigateTo } from '..'
 const prefetch = (routeName: string) => {}
 
 export default function useRouting<
-  RProp extends RouteProp<ParamListBase, string>,
-  NProp extends NavigationProp<ParamListBase>
+  RProp extends RouteProp<ParamListBase, string> = RouteProp<
+    ParamListBase,
+    string
+  >,
+  NProp extends NavigationProp<ParamListBase> = NavigationProp<ParamListBase>
 >() {
   // @ts-ignore
-  const { navigate: nav, push: pushTo, goBack } = useNavigation<NProp>()
+  const { navigate: nav, push: pushTo, goBack, popToTop } = useNavigation<
+    NProp
+  >()
 
   const { params } = useRoute<RProp>()
 
@@ -41,5 +46,13 @@ export default function useRouting<
     return _.get(params, param, fallback)
   }
 
-  return { navigate, getParam, push, goBack: () => goBack(), params, prefetch }
+  return {
+    navigate,
+    getParam,
+    push,
+    goBack: () => goBack(),
+    params,
+    prefetch,
+    popToTop,
+  }
 }
