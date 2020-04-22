@@ -19,9 +19,13 @@ export default function useRouting<
   NProp extends NavigationProp<ParamListBase> = NavigationProp<ParamListBase>
 >() {
   // @ts-ignore
-  const { navigate: nav, push: pushTo, goBack, popToTop } = useNavigation<
-    NProp
-  >()
+  const {
+    navigate: nav,
+    push: pushTo,
+    goBack,
+    popToTop,
+    replace: rep,
+  } = useNavigation<NProp>()
 
   const { params } = useRoute<RProp>()
 
@@ -45,6 +49,12 @@ export default function useRouting<
   const getParam = <Param>(param: string, fallback?: unknown): Param => {
     return _.get(params, param, fallback)
   }
+  const replace = useCallback(
+    <To extends NavigateTo = NavigateTo>(route: To) => {
+      rep(route.routeName, route.params)
+    },
+    [rep]
+  )
 
   return {
     navigate,
@@ -54,5 +64,6 @@ export default function useRouting<
     params,
     prefetch,
     popToTop,
+    replace,
   }
 }
