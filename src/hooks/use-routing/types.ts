@@ -1,3 +1,11 @@
+import {
+  useNavigation,
+  useRoute,
+  RouteProp,
+  ParamListBase,
+  NavigationProp,
+} from '@react-navigation/native'
+
 type GenericRoute = {
   /**
    * React navigation route & web page URL extension
@@ -45,3 +53,6 @@ type GenericRoute = {
 }
 
 export type NavigateTo = GenericRoute
+
+export type DefaultRouteProp = RouteProp<ParamListBase, string>
+export type DefaultNavigationProp = NavigationProp<ParamListBase>

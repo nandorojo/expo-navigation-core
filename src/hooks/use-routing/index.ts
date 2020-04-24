@@ -1,30 +1,24 @@
-import {
-  useNavigation,
-  useRoute,
-  RouteProp,
-  ParamListBase,
-  NavigationProp,
-} from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { useCallback } from 'react'
-import _ from 'lodash'
+import * as _ from 'lodash'
 import { NavigateTo } from '..'
+import { DefaultRouteProp, DefaultNavigationProp } from './types'
 
 const prefetch = (routeName: string) => {}
 
 export default function useRouting<
-  RProp extends RouteProp<ParamListBase, string> = RouteProp<
-    ParamListBase,
-    string
-  >,
-  NProp extends NavigationProp<ParamListBase> = NavigationProp<ParamListBase>
+  RProp extends DefaultRouteProp = DefaultRouteProp,
+  NProp extends DefaultNavigationProp = DefaultNavigationProp
 >() {
-  // @ts-ignore
   const {
     navigate: nav,
+    // @ts-ignore
     push: pushTo,
     goBack,
+    // @ts-ignore
     popToTop,
     replace: rep,
+    setParams,
   } = useNavigation<NProp>()
 
   const { params } = useRoute<RProp>()
@@ -50,8 +44,8 @@ export default function useRouting<
     return _.get(params, param, fallback)
   }
   const replace = useCallback(
-    <To extends NavigateTo = NavigateTo>(route: To) => {
-      rep(route.routeName, route.params)
+    <To extends NavigateTo = NavigateTo>({ routeName, params }: To) => {
+      rep(routeName, params)
     },
     [rep]
   )
@@ -65,5 +59,6 @@ export default function useRouting<
     prefetch,
     popToTop,
     replace,
+    setParams,
   }
 }
