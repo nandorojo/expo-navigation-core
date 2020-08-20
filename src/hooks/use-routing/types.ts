@@ -1,6 +1,4 @@
 import {
-  useNavigation,
-  useRoute,
   RouteProp,
   ParamListBase,
   NavigationProp,

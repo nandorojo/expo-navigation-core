@@ -1,8 +1,8 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useCallback } from 'react'
 import * as _ from 'lodash'
-import { NavigateTo } from '..'
 import { DefaultRouteProp, DefaultNavigationProp } from './types'
+import { NavigateTo } from '..'
 
 const prefetch = (routeName: string) => {}
 

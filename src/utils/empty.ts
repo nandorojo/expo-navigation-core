@@ -1,6 +1,6 @@
 const empty = {
-	object: {},
-	array: [],
+  object: {},
+  array: [],
 }
 
 export default empty
