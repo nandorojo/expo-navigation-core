@@ -50,6 +50,13 @@ type GenericRoute = {
      */
     as?: string
   }
+
+  native?: {
+    /**
+     * Nesting navigator screen on native.
+     */
+    screen?: string
+  }
 }
 
 export type NavigateTo = GenericRoute

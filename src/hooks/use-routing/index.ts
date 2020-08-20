@@ -25,11 +25,19 @@ export default function useRouting<
 
   const navigate = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
-      nav({
-        name: route.routeName,
-        params: route.params,
-        key: route.key,
-      })
+      if (route?.native?.screen) {
+        nav(route.routeName, {
+          screen: route.native.screen,
+          params: route.params,
+          key: route.key,
+        })
+      } else {
+        nav({
+          name: route.routeName,
+          params: route.params,
+          key: route.key,
+        })
+      }
     },
     [nav]
   )

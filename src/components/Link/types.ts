@@ -4,6 +4,7 @@ import { ComponentPropsWithoutRef } from 'react'
 export type LinkProps<
   ExtraProps extends object = {},
   Web extends object = {},
+  Native extends object = {},
   Params extends object = {}
 > = {
   /**
@@ -27,6 +28,7 @@ export type LinkProps<
    */
   params?: Params
   web?: Web
+  native?: Native
   /**
    * If false, it will not automatically wrap the children with a `Text` node.
    * This is useful if you want to use a link around something other than text.

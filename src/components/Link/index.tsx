@@ -41,6 +41,7 @@ const LinkMaker = <
         touchableOpacityProps = empty.object,
         routeName,
         params,
+        native,
         children,
         isText = true,
       } = props
@@ -50,6 +51,7 @@ const LinkMaker = <
           navigate({
             routeName: routeName || '/',
             params,
+            native,
           }),
         [navigate, routeName, params]
       )
