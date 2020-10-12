@@ -1,9 +1,11 @@
 import { TouchableOpacity, TextStyle } from 'react-native'
 import { ComponentPropsWithoutRef } from 'react'
+import { NavigateTo } from '../../hooks'
 
 export type LinkProps<
   ExtraProps extends object = {},
   Web extends object = {},
+  Native extends object = Required<NavigateTo>['native'],
   Params extends object = {}
 > = {
   /**
@@ -34,4 +36,5 @@ export type LinkProps<
    * Default: `true`
    */
   isText?: boolean
+  native?: Native
 } & ExtraProps

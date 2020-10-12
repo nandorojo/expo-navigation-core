@@ -50,6 +50,14 @@ type GenericRoute = {
      */
     as?: string
   }
+  native?: {
+    /**
+     * Used for a nested screen in your navigator.
+     *
+     * See React Navigation's docs: https://reactnavigation.org/docs/nesting-navigators/#passing-params-to-a-screen-in-a-nested-navigator
+     */
+    screen?: string
+  }
 }
 
 export type NavigateTo = GenericRoute
