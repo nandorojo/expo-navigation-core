@@ -1,34 +1,75 @@
-import { useNavigation } from 'react-navigation-hooks'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { useCallback } from 'react'
-import { NavigateTo } from '..'
+import get from 'lodash.get'
+import { DefaultRouteProp, DefaultNavigationProp, NavigateTo } from './types'
 
-export default function useRouting() {
+const prefetch = (routeName: string) => {}
+
+export default function useRouting<
+  RProp extends DefaultRouteProp = DefaultRouteProp,
+  NProp extends DefaultNavigationProp = DefaultNavigationProp
+>() {
   const {
     navigate: nav,
-    getParam: grabParam,
+    // @ts-ignore
     push: pushTo,
     goBack,
-  } = useNavigation()
+    // @ts-ignore
+    popToTop,
+    replace: rep,
+    setParams,
+    dispatch,
+    canGoBack,
+  } = useNavigation<NProp>()
+
+  const { params } = useRoute<RProp>()
 
   const navigate = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
-      nav({
-        routeName: route.routeName,
-        params: route.params,
-      })
+      if (route?.native?.screen) {
+        nav(route.routeName, {
+          screen: route.native.screen,
+          params: route.params,
+          key: route.key,
+        })
+      } else {
+        nav({
+          name: route.routeName,
+          params: route.params,
+          key: route.key,
+        })
+      }
     },
     [nav]
   )
   const push = useCallback(
     <To extends NavigateTo = NavigateTo>(route: To) => {
-      pushTo(route)
+      if (pushTo) pushTo(route)
+      else navigate<To>(route)
     },
-    [pushTo]
+    [pushTo, navigate]
   )
   const getParam = <Param>(param: string, fallback?: unknown): Param => {
-    const value: Param = grabParam(param, fallback)
-    return value
+    return get(params, param, fallback)
   }
+  const replace = useCallback(
+    <To extends NavigateTo = NavigateTo>({ routeName, params }: To) => {
+      rep(routeName, params)
+    },
+    [rep]
+  )
 
-  return { navigate, getParam, push, goBack: () => goBack() }
+  return {
+    navigate,
+    getParam,
+    push,
+    goBack: () => goBack(),
+    params,
+    prefetch,
+    popToTop,
+    replace,
+    setParams,
+    canGoBack,
+    pathname: '',
+  }
 }

@@ -1,9 +1,11 @@
 import { TouchableOpacity, TextStyle } from 'react-native'
 import { ComponentPropsWithoutRef } from 'react'
+import { NavigateTo } from '../../hooks'
 
 export type LinkProps<
   ExtraProps extends object = {},
   Web extends object = {},
+  Native extends object = Required<NavigateTo>['native'],
   Params extends object = {}
 > = {
   /**
@@ -27,4 +29,12 @@ export type LinkProps<
    */
   params?: Params
   web?: Web
+  /**
+   * If false, it will not automatically wrap the children with a `Text` node.
+   * This is useful if you want to use a link around something other than text.
+   *
+   * Default: `true`
+   */
+  isText?: boolean
+  native?: Native
 } & ExtraProps

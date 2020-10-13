@@ -1,6 +1,6 @@
 {
   "name": "expo-navigation-core",
-  "version": "0.0.9",
+  "version": "0.3.9",
   "description": "Main package for reusable expo navigation elements. This package probably shouldn't be installed on its own.",
   "sideEffects": true,
   "main": "build/index.js",
@@ -16,7 +16,8 @@
     "test": "expo-module test",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module"
+    "expo-module": "expo-module",
+    "upload": "yarn publish --tag v5"
   },
   "files": [
     "build"
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.149",
+    "@types/lodash.get": "^4.4.6",
     "@types/react": "^16.9.16",
     "eslint": "^6.8.0",
     "eslint-config-universe": "^2.1.0",
@@ -38,7 +40,7 @@
     "react-native-web": "^0.11.7"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "react-navigation-hooks": "^1.1.0"
+    "@react-navigation/native": "^5.0.0-alpha.29",
+    "lodash.get": "^4.4.2"
   }
 }

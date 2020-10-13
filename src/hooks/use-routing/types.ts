@@ -1,8 +1,17 @@
+import {
+  useNavigation,
+  useRoute,
+  RouteProp,
+  ParamListBase,
+  NavigationProp,
+} from '@react-navigation/native'
+
 type GenericRoute = {
   /**
    * React navigation route & web page URL extension
    */
   routeName: string
+  key?: string
   /**
    * (optional) Dictionary that will be accessed via `getParams` in the target screen.
    */
@@ -40,7 +49,22 @@ type GenericRoute = {
      * Should start with `/`.
      */
     as?: string
+    /**
+     * Should use shallow routing.
+     */
+    shallow?: boolean
+  }
+  native?: {
+    /**
+     * Used for a nested screen in your navigator.
+     *
+     * See React Navigation's docs: https://reactnavigation.org/docs/nesting-navigators/#passing-params-to-a-screen-in-a-nested-navigator
+     */
+    screen?: string
   }
 }
 
 export type NavigateTo = GenericRoute
+
+export type DefaultRouteProp = RouteProp<ParamListBase, string>
+export type DefaultNavigationProp = NavigationProp<ParamListBase>
