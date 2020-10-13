@@ -19,6 +19,7 @@ export default function useRouting<
     replace: rep,
     setParams,
     dispatch,
+    canGoBack,
   } = useNavigation<NProp>()
 
   const { params } = useRoute<RProp>()
@@ -68,5 +69,6 @@ export default function useRouting<
     popToTop,
     replace,
     setParams,
+    canGoBack,
   }
 }
