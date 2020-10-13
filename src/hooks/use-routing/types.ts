@@ -49,6 +49,10 @@ type GenericRoute = {
      * Should start with `/`.
      */
     as?: string
+    /**
+     * Should use shallow routing.
+     */
+    shallow?: boolean
   }
   native?: {
     /**
