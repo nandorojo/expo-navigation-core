@@ -11,11 +11,12 @@ export default function useRouting<
 >() {
   const {
     navigate: nav,
-    // @ts-ignore
+    // @ts-expect-error
     push: pushTo,
     goBack,
-    // @ts-ignore
+    // @ts-expect-error
     popToTop,
+    // @ts-expect-error replace doesn't exist
     replace: rep,
     setParams,
     dispatch,
